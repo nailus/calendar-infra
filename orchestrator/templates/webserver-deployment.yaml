@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-webserver
+spec:
+  replicas: {{ .Values.webserver.replicas }}
+  selector:
+    matchLabels:
+      app: airflow-webserver
+  template:
+    metadata:
+      labels:
+        app: airflow-webserver
+    spec:
+      containers:
+        - name: webserver
+          image: "{{ .Values.images.airflow.repository }}:{{ .Values.images.airflow.tag }}"
+          imagePullPolicy: "{{ .Values.images.airflow.pullPolicy }}"
+          command: {{ toJson .Values.webserver.command }}
+          args: {{ toJson .Values.webserver.args }}
+          ports:
+            - containerPort: {{ .Values.webserver.containerPort }}

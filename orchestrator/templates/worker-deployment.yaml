@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: airflow-worker
+spec:
+  replicas: {{ .Values.worker.replicas }}
+  selector:
+    matchLabels:
+      app: airflow-worker
+  template:
+    metadata:
+      labels:
+        app: airflow-worker
+    spec:
+      containers:
+        - name: worker
+          image: "{{ .Values.images.airflow.repository }}:{{ .Values.images.airflow.tag }}"
+          imagePullPolicy: "{{ .Values.images.airflow.pullPolicy }}"

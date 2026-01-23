@@ -1,0 +1,21 @@
+images:
+  airflow:
+    repository: ghcr.io/nailus/airflow-executor
+    tag: latest
+    pullPolicy: IfNotPresent
+
+webserver:
+  replicas: 1
+  containerPort: 8080
+  command: ["airflow"]
+  args: ["api-server"]
+
+scheduler:
+  replicas: 1
+
+worker:
+  replicas: 1
+
+ingress:
+  enabled: true
+  host: airflow.local
