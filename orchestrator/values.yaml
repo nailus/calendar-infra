@@ -9,6 +9,9 @@ webserver:
   containerPort: 8080
   command: ["airflow"]
   args: ["api-server"]
+  env:
+    - name: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
+      value: "postgresql+psycopg2://airflow:password@database-postgresql:5432/airflow"
 
 scheduler:
   replicas: 1
