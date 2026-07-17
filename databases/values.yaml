@@ -1,4 +1,9 @@
 postgresql:
   enabled: true
+  # postgresqlPassword: "test"
+  # postgresqlUsername: "test"
+  # postgresqlDatabase: "testdb"
+  configMap:
+    POSTGRES_PASSWORD:  "test"
 redis:
   enabled: true
